@@ -26,7 +26,7 @@ var stringifyJSON = function(obj) {
     return `[${output}]`
   }
   if (typeof obj === 'object' && !Array.isArray(obj)) {
-    // let output = '';
+    let output = '';
     if (Object.keys(obj).length <= 0) {
       return `{}`
     }
@@ -34,25 +34,27 @@ var stringifyJSON = function(obj) {
     //   object(obj)
     // }
     // function object (obj) {
-      let output = '{'
+      // let output = '{'
       for (let key in obj) {
-        if (Object.keys(obj).length === 1) {
-          output = output.concat(stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + '}')
-          return output;
-        } else {
-          Object.keys(obj).forEach(function(key) { 
-            output = output.concat(stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + ',')
-          })
+        str += `${stringifyJSON(key)}: ,`
+        // if (Object.keys(obj).length === 1) {
+        //   output = output.concat(stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + '}')
+        //   return output;
+        // } else {
+        //   Object.keys(obj).forEach(function(key) { 
+        //     output = output.concat(stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + ',')
+        //   })
         }
+        return `{${str.slice(0,-1)}}`
         // output[key] = stringifyJSON(key)
         // output[key] = obj[key]
         // console.log(output)
         // console.log(Object.values(obj))
         // console.log(output[stringifyJSON(key)] = stringifyJSON(key))
       }
-      output = output.slice(0, output.length-1)
-      console.log(output + '}')
-      return output + '}';
+      // output = output.slice(0, output.length-1)
+      // console.log(output + '}')
+      // return output + '}';
     // }
     // return `{${output}}`
   }
